@@ -1,3 +1,5 @@
+var products = []
+
 /**
  * Makes GET request to the remote server to fetch the categories.
  * 
@@ -68,12 +70,45 @@ function loadCategoryTemplate(cat) {
 function loadProducts(){
     var url = new URL(window.location.href); 
     var categoryID = url.searchParams.get('categoryId'); 
+
+    getSubCategories(categoryID).then(subcats => {
+        console.log("Creating subcategory filtering...")
+        console.log(subcats);
+        loadFilterChoices({
+            subcategs: subcats
+        });
+    });
+
     getProducts(categoryID).then(prods => {
         for(var i=0; i<prods.length; i++){
             console.log(`Appending product No.${i+1}..`);
+            products.push(prods[i]);
+            console.log(`Products size ${products.length}..`);
             loadProductTemplate(prods[i]);
         }
     });
+}
+
+function loadFilterChoices(subcategories) {
+    var template = Handlebars.compile(document.querySelector("#subcatFilterTemplate").innerHTML);
+    var filled = template(subcategories);
+    document.getElementById("filtersContainer").innerHTML = filled;
+}
+
+function filter(){
+    var radButs = document.getElementsByName('filterRad');
+  
+    for(i = 0; i < radButs.length; i++) {
+        if(radButs[i].checked){
+            document.getElementById("productsContainer").innerHTML = null;
+            for(var j=0; j<products.length; j++){
+                if(radButs[i].value == "0" || radButs[i].value == products[j]["subcategory_id"]){
+                    loadProductTemplate(products[j]);
+                }
+            }
+            break;
+        }
+    }
 }
 
 function loadProductTemplate(prod){

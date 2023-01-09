@@ -25,6 +25,17 @@
 			<h3 class="pricetag">${{cost}}</h3>
 		</script>
 
+		<script type="text/handlebars-template" id="subcatFilterTemplate">
+			<p>Filter by subcategory:</p>
+			<input class="filterChoice" type="radio" id="0" name="filterRad" value="0" onclick="filter();" checked>
+ 			<label class="filterChoiceLabel" for="0">All</label><br>
+		
+			{{#each subcategs}}
+			<input class="filterChoice" type="radio" id="{{this.id}}" name="filterRad" value="{{this.id}}" onclick="filter();">
+ 			<label class="filterChoiceLabel" for="{{this.id}}">{{this.title}}</label><br>
+			{{/each}}
+		</script>
+
 		<style>
 			#productstab {
 				background-color: #4CAF50;
@@ -45,10 +56,17 @@
 		</nav>
 
 		<main>
+
+			<form id="filtersContainer">
+
+			</form>
+
 			<!-- Place html for category here. -->
 			<section id="productsContainer" class="categories">
 				
 			</section>
+
+			
 		</main>
 
 			
