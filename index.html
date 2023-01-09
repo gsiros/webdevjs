@@ -2,19 +2,27 @@
 
 <html lang="en">
 	<head>
-
 		<link rel="icon" href="src/4matlogo.png" type="image/x icon">
 
 		<title>4mat.gr: Η επιτομή της τεχνολογίας στο σπίτι σας.</title>
 		<!-- meta elements -->
 		<meta charset="UTF-8">
 		<meta name="description" content = "e-shop">
-		<meta name ="keywords" content="pc, smartphones, technology">
+		<meta name ="keywords" content="iphone, pc, smartphones, technology">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="js/css_misc.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		
+		
+		<script type="text/handlebars-template" id="categoryTemplate">
+			<h3>{{title}}</h3>
+			<a class="categorytitle" href="category.html?categoryId={{id}}">
+				<img src="{{{ img_url }}}" alt="category_logo">
+			</a>
+		</script>
 		
 		<style>
 			#indextab {
@@ -24,52 +32,38 @@
 
 	</head>
 
-	<body>	
-		
+	<body onload="loadCategories();">
 		<section id="logocontainer">
 			<img id="logopic" src="src/4matlogo.png"> <section id="logotext">4MAT&#174; Online</section>
 		</section>
-		
 		<nav id="mainnavbar" class="navbar">
-			<a id="indextab" href = "index.html">Αρχική</a>
-			<a id="productstab" href = "product-categories.html">Προϊόντα</a>
-			<a id="abouttab" href = "aboutUs.html">Σχετικά με εμάς</a>
-			<a id="contacttab" href = "contactUs.html">Επικοινωνία</a>
+			<a id="indextab" href = "index.html">Home</a>
+			<a id="productstab" href = "category.html">Products</a>
             <a id="logintab" href="login.html">Σύνδεση</a>
 			<a id="moretab" href="javascript:void(0);" onclick="navbarChanger()"><i class="fa fa-bars" aria-hidden="true"></i></a>
 		</nav>
 
-		<main id="indexmain" class="indexMain">
-			<h1>Γιορτινές Εκπτώσεις 2022 στο 4MAT.gr!</h1>
-			<p>Εξαιρετικές τιμές σε κάθε είδος τεχνολογίας και εκπτώσεις που δεν θα συναντήσετε σε κανένα άλλο ηλεκτρονικό κατάστημα σε
-				όλη την επικράτεια.
-			</p>
-			<section>
-				<a href="product-categories.html">Δείτε την συλλογή</a>
-				<i class="fa fa-sharp fa-solid fa-chevron-right"></i>	
-			</section>
-			
+        <main>
+			<h1 class="categorytitle">Κινητά Τηλέφωνα</h1>
+            <br>
+            <section id="categoryContainer" class="categories"> 
+                <!--<section class="iproduct">
+					<a class="producttitle" href="https://www.skroutz.gr/s/38004388/Apple-iPhone-14-5G-6GB-128GB-Midnight.html?from=featured&product_id=128931996" target="_blank">
+						<h3>iPhone 14 (6GB/128GB) Midnight </h3>
+						<img src="src/iphone_14.png" alt="pc_acc_logo" height="150">
+					</a>
+					
+					<h4 class="shortdesc">
+						Μοντέλο: 2022, Οθόνη: Super Retina XDR OLED 6.1", Μπαταρία: 3240mAh
+					</h4>
 
-			<picture id="indexad">
-				<source media="(max-width: 480px)" srcset="src/index_small.jpg">
-				<source media="(max-width: 768px)" srcset="src/index_medium.jpg 2x">
-				<img id="indexadsrc" src="src/index_large.jpg" alt="index_img">
-			</picture>
-			
-			<h1 id="newarrival">⭐️🎄 Νέες Αφίξεις 🎄⭐️</h1>
-			<h2>iPhone 14 Pro</h2>
-			<p>Πιο pro από ποτέ.</p>
-			<section>
-				<a href="iphone14pro.html">Αγοράστε εδώ</a>
-				<i class="fa fa-sharp fa-solid fa-chevron-right"></i>	
-			</section>
-
-			<picture id="indexad">
-				<source media="(max-width: 480px)" srcset="src/iphone14pro_ad_small.jpg">
-				<source media="(max-width: 768px)" srcset="src/iphone14pro_ad_medium.jpg">
-				<img id="indexadsrc" src="src/iphone14pro_ad_large.jpg">
-			</picture>
-		</main>	
+					<h3 class="pricetag">
+						799$
+					</h3>
+						
+				</section>-->            
+            </section>
+        </main>
 		
 		<footer>
 

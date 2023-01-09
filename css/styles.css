@@ -231,10 +231,6 @@ to be shown correctly while resized.
     transition: box-shadow 0.25s;
 }
 
-.categoryitem img {
-    margin-bottom: 15px;
-}
-
 .hiddensubcat {
     display: none;
 }
@@ -263,18 +259,21 @@ we use the same grid layout technique to
 products-laptops and products-smartphones.
 */
 
-.products {
+.categories {
     display: grid;
     --categoryitem-min-size: 20rem;
     grid-template-columns: repeat(auto-fill, minmax(var(--categoryitem-min-size), 1fr));
     grid-gap: 1rem;
     justify-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.iproduct {
+.icategory {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-items: center;
     width: auto;
     max-width: 300px;
     background-color: white;
@@ -285,37 +284,34 @@ products-laptops and products-smartphones.
     transition: box-shadow 0.25s;
 }
 
-.producttitle img {
+.categorytitle img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
     transition: height 1s, width 1s;
 }
 
-.producttitle img:hover {
-    height: 200px;
-    width: 200px;
+.categorytitle img:hover {
+    height: 220px;
+    width: 220px;
 }
 
-section:hover.iproduct {
+section:hover.icategory {
     box-shadow: 0px 0px 3px 4px gray;
 }
 
-.producttitle {
-    flex: 1;
+.categorytitle {
     font-size: medium;
     text-decoration: none;
     color: black;
 }
 
-
-.shortdesc {
-    flex: 1;
-    color: #757575;
-    font-size: small;
+.pricetag {
+    align-self: flex-end;
 }
+
 
 table.specs {
     border-collapse: collapse;

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<link rel="icon" href="src/4matlogo.png" type="image/x icon">
+
+		<title>4mat.gr: Η επιτομή της τεχνολογίας στο σπίτι σας.</title>
+		<!-- meta elements -->
+		<meta charset="UTF-8">
+		<meta name="description" content = "e-shop">
+		<meta name ="keywords" content="pc, smartphones, technology">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script type="text/javascript" src="js/css_misc.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		
+		<script type="text/handlebars-template" id="productTemplate">
+			<h3>{{title}}</h3>
+			<a class="categorytitle">
+				<img src="{{{ image }}}" alt="category_logo">
+			</a>
+			<p class="shortdesc">{{description}}</p>
+			<h3 class="pricetag">${{cost}}</h3>
+		</script>
+
+		<style>
+			#productstab {
+				background-color: #4CAF50;
+			}
+		</style>
+
+	</head>
+
+	<body onload="loadProducts();">
+		<section id="logocontainer">
+			<img id="logopic" src="src/4matlogo.png"> <section id="logotext">4MAT&#174; Online</section>
+		</section>
+		<nav id="mainnavbar" class="navbar">
+			<a id="indextab" href = "index.html">Home</a>
+			<a id="productstab" href = "product-categories.html">Products</a>
+            <a id="logintab" href="login.html">Σύνδεση</a>
+			<a id="moretab" href="javascript:void(0);" onclick="navbarChanger()"><i class="fa fa-bars" aria-hidden="true"></i></a>
+		</nav>
+
+		<main>
+			<!-- Place html for category here. -->
+			<section id="productsContainer" class="categories">
+				
+			</section>
+		</main>
+
+			
+		
+		<footer>
+
+
+			<section id="footersocials">
+				<h3>ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ</h3>
+				<section class="footersocialicons">
+					<a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+					<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></i></a>
+					<a href="https://www.twitter.com/"><i><i class="fa fa-twitter"></i></i></a>
+					<a href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a>
+				</section>
+			</section>
+
+			<section id="footercopyright">
+				<img id="footerlogo" src="src/4matlogo.png">
+				<p>4MAT&#174; Online © 2022 - 4mat.gr - All Rights Reserved.</p>
+			</section>
+				
+				
+				
+		</footer>
+
+	</body>
+
+</html>
