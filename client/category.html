@@ -12,6 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://kit.fontawesome.com/c82bcd8173.js" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="js/css_misc.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
@@ -22,7 +23,12 @@
 				<img src="{{{ image }}}" alt="category_logo">
 			</a>
 			<p class="shortdesc">{{description}}</p>
-			<h3 class="pricetag">${{cost}}</h3>
+			<div class="costcontainer">
+				<h3 class="pricetag">${{cost}}</h3>
+				<i id="add-to-cart-icon" class="fa-solid fa-cart-plus"></i>
+				<span>Add to cart</span>
+			</div>
+			
 		</script>
 
 		<script type="text/handlebars-template" id="subcatFilterTemplate">

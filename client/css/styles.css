@@ -284,6 +284,11 @@ products-laptops and products-smartphones.
     transition: box-shadow 0.25s;
 }
 
+.shortdesc {
+    color: #757575;
+    font-size: small;
+}
+
 .categorytitle img {
     display: block;
     margin-left: auto;
@@ -307,6 +312,38 @@ section:hover.icategory {
     text-decoration: none;
     color: black;
 }
+
+.costcontainer {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-items: center;
+    align-items: center;
+}
+
+#add-to-cart-icon {
+    font-size: 20pt;
+    margin-right: 10px;
+    color: #757575;
+}
+
+#add-to-cart-icon:hover {
+    color: #504f4f;
+    cursor: pointer;
+}
+
+#add-to-cart-icon:hover + span {
+    display: inline-block;
+}
+
+.costcontainer span {
+    display: none;
+    font-style: italic;
+    color: #757575;
+    margin-right: 5px;
+}
+
 
 .pricetag {
     align-self: flex-end;
