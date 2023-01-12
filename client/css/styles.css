@@ -222,7 +222,7 @@ to be shown correctly while resized.
     align-items: center;
     width: auto;
     min-width: 300px;
-    max-width: 500px;
+    max-width: 400px;
     background-color: white;
     border-radius: 5px;
     padding-left: 10px;
@@ -267,8 +267,8 @@ products-laptops and products-smartphones.
     grid-template-columns: repeat(auto-fill, minmax(var(--categoryitem-min-size), 1fr));
     grid-gap: 1rem;
     justify-items: center;
-    margin-top: 190px;
-    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .icategory {
@@ -1064,6 +1064,17 @@ screen gets lower than 600 pixels.
         grid-template-columns: 1fr;
         justify-items: center;
     }
+
+    .categorynavbar {
+        float: none;
+        margin-left: 25px;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-right: 25px;
+        
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -1088,4 +1099,6 @@ screen gets lower than 600 pixels.
     #footercopyright p {
         font-size: 12px;
     }
+
+
 }
