@@ -339,8 +339,17 @@ section:hover.icategory {
     cursor: pointer;
 }
 
-#add-to-cart-icon:hover + span {
-    display: inline-block;
+#add-to-cart-icon + span {
+    display: none;
+    color: #4CAF50;
+    opacity: 0;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 1;}
+    100% { opacity: 0; }
 }
 
 .costcontainer span {

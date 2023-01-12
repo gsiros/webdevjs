@@ -25,8 +25,8 @@
 			<p class="shortdesc">{{description}}</p>
 			<div class="costcontainer">
 				<h3 class="pricetag">${{cost}}</h3>
-				<i id="add-to-cart-icon" class="fa-solid fa-cart-plus" onclick="addToCart({{ id }}); return false;"></i>
-				<span>Add to cart</span>
+				<i id="add-to-cart-icon" class="fa-solid fa-cart-plus" onclick="addToCart(this, {{ id }}); return false;"></i>
+				<span>Added to cart!</span>
 			</div>
 			
 		</script>

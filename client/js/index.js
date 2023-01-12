@@ -194,7 +194,7 @@ function logout(){
     greetmessage.innerHTML = "";
 }
 
-function addToCart(productId) {
+function addToCart(element, productId) {
 
     if (!currUsername || !currSessionId){
         alert("Please login before adding items to cart.");
@@ -226,6 +226,12 @@ function addToCart(productId) {
             // If OK, increase cart counter.
             let cartcounter = document.getElementsByClassName("cartcounter")[0];
             cartcounter.innerHTML = parseInt(cartcounter.innerHTML) + 1;
+
+            const hiddenElement = element.nextElementSibling;
+            hiddenElement.style.display = "inline-block";
+            setTimeout(function (){
+                hiddenElement.style.display = "none";
+            }, 3000);
             return res.text();
         } else {
             return null;
