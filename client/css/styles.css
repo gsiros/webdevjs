@@ -261,6 +261,10 @@ we use the same grid layout technique to
 products-laptops and products-smartphones.
 */
 
+#productsContainer{
+    margin-top: 180px;
+}
+
 .categories {
     display: grid;
     --categoryitem-min-size: 20rem;
@@ -1065,15 +1069,16 @@ screen gets lower than 600 pixels.
         justify-items: center;
     }
 
+    #productsContainer{
+        margin-top: 50px;
+    }
+
     .categorynavbar {
         float: none;
-        margin-left: 25px;
-        padding-top: 20px;
-        padding-bottom: 10px;
-        padding-left: 30px;
-        padding-right: 30px;
-        margin-right: 25px;
-        
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 180px;
     }
 }
 
