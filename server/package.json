@@ -1,0 +1,16 @@
+{
+  "name": "webdevjs",
+  "version": "1.0.0",
+  "description": "A simple webserver for the Web Dev AUEB course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Georgios Syros",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "formidable": "^2.1.1",
+    "uuid": "^9.0.0"
+  }
+}

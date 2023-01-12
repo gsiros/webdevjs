@@ -34,6 +34,7 @@ Our logo is contained in a Flex-Box.
     margin-bottom: 3px;
     justify-content: left;
     align-items: center;
+    z-index: 10;
 }
 
 #logotext {
@@ -102,6 +103,7 @@ nav {
     width: 100%;
     background-color: #0B577F;
     margin-bottom: 0;
+    z-index: 10;
 }
 
 /*
@@ -265,7 +267,7 @@ products-laptops and products-smartphones.
     grid-template-columns: repeat(auto-fill, minmax(var(--categoryitem-min-size), 1fr));
     grid-gap: 1rem;
     justify-items: center;
-    margin-top: 50px;
+    margin-top: 190px;
     margin-bottom: 50px;
 }
 
@@ -347,6 +349,115 @@ section:hover.icategory {
 
 .pricetag {
     align-self: flex-end;
+}
+
+
+.categorynavbar {
+    float: left;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-left: 25px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.loginform {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.greetusercontainer {
+    width: 100%;
+    margin-left: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-items: center;
+    gap: 2.5px;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#greetmessage {
+    color: #4CAF50;
+    font-size: large;
+}
+
+.logoutbutton {
+    width: 100%;
+}
+
+
+/* USE THE FOLLOWING FOR SMARTPHONE SIZE.
+
+.categorynavbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.loginform {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.greetusercontainer {
+    margin-left: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+}
+
+#greetmessage {
+    color: #4CAF50;
+    font-size: large;
+    margin-right: 10px;
+}
+*/
+
+.carticonsection {
+    font-size: larger;
+    position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+    padding: 8px;
+    z-index: 1;
+}
+
+#carticon {
+    color: #757575;
+    font-size: 20pt;
+}
+
+#carticon:hover {
+    cursor: pointer;
+    color: #504f4f;
+}
+
+.cartcounter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: small;
+    color: white;
+    background: tomato;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 50%;
 }
 
 table.specs {

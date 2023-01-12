@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="css/styles.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="js/css_misc.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 
 		<style>
 			#logintab {
@@ -43,7 +44,7 @@
 						<label for="txt_name">Όνομα χρήστη</label>
 						<input type="text" id="txt_name" name="username" required>
 						<label for="usrpswd">Κωδικός Πρόσβασης</label>
-						<input type="password" id="usrpswd" name="mail" required>
+						<input type="password" id="usrpswd" name="passwd" required>
 						<p>
 							Δεν είσαι ήδη εγγεγραμένος; Δημιούργησε λογαριασμό 
 							<a href="register.html">εδώ.</a>
@@ -53,7 +54,7 @@
 					
 				</section>
 	
-				<button class="cfitem" type="submit">Σύνδεση</button>
+				<button class="cfitem" onclick="login();">Login</button>
 
 			</form>
 

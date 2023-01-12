@@ -1,4 +1,6 @@
 var products = []
+var currSessionId = null;
+var currUsername = null;
 
 /**
  * Makes GET request to the remote server to fetch the categories.
@@ -44,10 +46,18 @@ async function getProducts(id){
     return data.json();
 }
 
+function getLocalProduct(id){
+    for(const prd in products){
+        if(products[prd]["id"] == id){
+            return products[prd];
+        }
+    }
+    return null;
+}
+
 // For index.html 
 
 function loadCategories()  {
-    console.log("ratio");
     getCategories().then(cats => {
         for (var i=0; i<cats.length; i++) {
             console.log(`Appending category template No.${i+1}..`);
@@ -72,8 +82,6 @@ function loadProducts(){
     var categoryID = url.searchParams.get('categoryId'); 
 
     getSubCategories(categoryID).then(subcats => {
-        console.log("Creating subcategory filtering...")
-        console.log(subcats);
         loadFilterChoices({
             subcategs: subcats
         });
@@ -118,4 +126,142 @@ function loadProductTemplate(prod){
     section.className = "icategory";
     section.innerHTML = filled;
     document.getElementById("productsContainer").append(section);
+}
+
+// User Login
+
+function login(){
+
+
+    var username = document.getElementById("usernameInput").value;
+    var password = document.getElementById("usrpswdInput").value;
+
+    if (username == "" || password == ""){
+        alert("Username or Password field is empty. Please fill out the fields and try again.");
+        return;
+    }
+
+    currUsername = username;
+    var userdata = new FormData();
+    userdata.append("username", username);
+    userdata.append("password", password);
+
+    fetch("http://localhost:4321/login", {
+        method: 'post',
+        body: userdata,
+    })
+    .then(response => {
+        if(response.status == 401){
+            alert("Invalid credentials! Try again...");
+        } else {
+            return response.text();
+        }
+    })
+    .then(data => {
+        // Store uid:
+        var resJson = JSON.parse(data);
+        currSessionId = resJson["sessionId"];
+        
+        var loginforma = document.getElementsByClassName("loginform")[0];
+        loginforma.style.display = "none";
+
+        var greetmessagecontainer = document.getElementsByClassName("greetusercontainer")[0];
+        greetmessagecontainer.style.display = "flex";
+
+        var greetmessage = document.getElementById("greetmessage");
+        greetmessage.innerHTML = `Hello, <b>${currUsername}</b>.`;
+
+        getCartSize();
+    });
+
+
+}
+
+function logout(){
+    currSessionId = null;
+    currUsername = null;
+
+    document.getElementById("usernameInput").value = "";
+    document.getElementById("usrpswdInput").value = "";
+    
+    var greetmessagecontainer = document.getElementsByClassName("greetusercontainer")[0];
+    greetmessagecontainer.style.display = "none";
+
+    var loginforma = document.getElementsByClassName("loginform")[0];
+    loginforma.style.display = "flex";
+
+    var greetmessage = document.getElementById("greetmessage");
+    greetmessage.innerHTML = "";
+}
+
+function addToCart(productId) {
+
+    if (!currUsername || !currSessionId){
+        alert("Please login before adding items to cart.");
+        return;
+    }
+
+    var url = new URL(window.location.href); 
+    var categoryID = url.searchParams.get('categoryId'); 
+
+    const prd = getLocalProduct(productId);
+
+    var userdata = new FormData();
+    userdata.append("username", currUsername);
+    userdata.append("sessionId", currSessionId);
+    userdata.append("productId", productId);
+    userdata.append("categoryId", categoryID);
+    userdata.append("title", prd["title"]);
+    userdata.append("cost", prd["cost"]);
+    
+
+    fetch("http://localhost:4321/addToCart", {
+        method: 'post',
+        body: userdata,
+    })
+    .then(res => {
+        if(res.status == 401){
+            alert("Unauthorized.");
+        } else if(res.status == 200) {
+            // If OK, increase cart counter.
+            let cartcounter = document.getElementsByClassName("cartcounter")[0];
+            cartcounter.innerHTML = parseInt(cartcounter.innerHTML) + 1;
+            return res.text();
+        } else {
+            return null;
+        }
+    })
+    .then(data => {
+        console.log(data);
+    });
+
+
+}
+
+function getCartSize() {
+    var userdata = new FormData();
+    userdata.append("username", currUsername);
+    userdata.append("sessionId", currSessionId);
+
+    fetch("http://localhost:4321/cartsize", {
+        method: 'post',
+        body: userdata,
+    })
+    .then(res => {
+        if(res.status == 401){
+            alert("Unauthorized.");
+        } else if(res.status == 404) {
+            alert("User not found.")
+        } else if(res.status == 200) {
+            // If OK, increase cart counter.
+            return res.text();
+        } else {
+            return null;
+        }
+    })
+    .then(data => {
+        var dataJSON = JSON.parse(data);
+        let cartcounter = document.getElementsByClassName("cartcounter")[0];
+        cartcounter.innerHTML = parseInt(dataJSON["size"]);
+    });
 }

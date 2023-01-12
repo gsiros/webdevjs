@@ -11,7 +11,7 @@
 		<meta name ="keywords" content="pc, smartphones, technology">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/styles.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 		<script src="https://kit.fontawesome.com/c82bcd8173.js" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="js/css_misc.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
@@ -25,7 +25,7 @@
 			<p class="shortdesc">{{description}}</p>
 			<div class="costcontainer">
 				<h3 class="pricetag">${{cost}}</h3>
-				<i id="add-to-cart-icon" class="fa-solid fa-cart-plus"></i>
+				<i id="add-to-cart-icon" class="fa-solid fa-cart-plus" onclick="addToCart({{ id }}); return false;"></i>
 				<span>Add to cart</span>
 			</div>
 			
@@ -63,9 +63,32 @@
 
 		<main>
 
-			<form id="filtersContainer">
+			<section class="categorynavbar">
 
-			</form>
+				<form class="loginform">
+					<label for="usernameInput">Username</label>
+					<input type="text" id="usernameInput" name="forma" required>
+					<label for="usrpswdInput">Password</label>
+					<input type="password" id="usrpswdInput" name="forma" required>
+					<button type="submit" class="loginbutton"  onclick="login(); return false;">Login</button>
+				</form>
+
+				<section class="greetusercontainer" style="display: none;">
+					<div class="userinfo">
+						<div id="greetmessage"></div>
+						<section class="carticonsection">
+							<i id="carticon" class="fa-solid fa-cart-shopping"></i>
+							<span class="cartcounter">0</span>
+						</section>						
+					</div>
+					
+					<button class="logoutbutton" onclick="logout();">Logout</button>
+				</section>
+
+
+				<form id="filtersContainer"></form>
+
+			</section>
 
 			<!-- Place html for category here. -->
 			<section id="productsContainer" class="categories">
