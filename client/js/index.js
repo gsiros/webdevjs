@@ -266,6 +266,57 @@ function getCartSize() {
     });
 }
 
+function loadCart(){
+
+    var url = new URL(window.location.href); 
+    var username = url.searchParams.get('username'); 
+    var sessionId = url.searchParams.get('sessionId'); 
+
+    var userdata = new FormData();
+    userdata.append("username", username);
+    userdata.append("sessionId", sessionId);
+
+    fetch("http://localhost:4321/cart", {
+        method: 'post',
+        body: userdata,
+    })
+    .then(res => {
+        if(res.status == 401){
+            alert("Unauthorized.");
+        } else if(res.status == 404) {
+            alert("User not found.")
+        } else if(res.status == 200) {
+            // If OK,
+            return res.text();
+        } else {
+            return null;
+        }
+    })
+    .then(data => {
+        var jsonCart = JSON.parse(data);
+        loadCartItems(jsonCart);
+        calculateCost(jsonCart);
+    });
+}
+
+function calculateCost(cart){
+    var totalCost = 0;
+    const items = cart["cartItems"];
+    items.forEach(item => {
+        totalCost += parseInt(item["cost"])*parseInt(item["quantity"]);
+    });
+    console.log(totalCost);
+    let costTextBox = document.getElementById("totalCostNumber");
+    costTextBox.innerHTML = "$"+totalCost;
+}
+
+function loadCartItems(cart){
+    var template = Handlebars.compile(document.querySelector("#cartItemsTemplate").innerHTML);
+    var filled = template(cart);
+    var table = document.getElementsByClassName("cartitems")[0];
+    table.innerHTML = filled;
+}
+
 function goToCart(){
     window.location = `/cart.html?username=${currUsername}&sessionId=${currSessionId}`;
 }

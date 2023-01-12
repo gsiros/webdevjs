@@ -15,12 +15,31 @@ class Cart {
     }
 
     add(product){
-        var productQuantity = this.#cart.get(product);
+        var prodJSON = JSON.stringify(product.toJSON());
+        var productQuantity = this.#cart.get(prodJSON);
         if(!productQuantity){
-            this.#cart.set(product, 1);
+            this.#cart.set(prodJSON, 1);
         } else {
-            this.#cart.set(product, productQuantity+1);
+            this.#cart.set(prodJSON, productQuantity+1);
         }    
+    }
+
+    toJSON(){
+        var jsonCart = {
+            "cartItems":[]
+        };
+        
+        this.#cart.forEach(function (value, key) {
+            var prod = JSON.parse(key);
+            jsonCart["cartItems"].push({
+                "title" : prod["title"],
+                "cost": prod["cost"],
+                "quantity": value
+            });
+        });
+
+        return jsonCart;
+
     }
 }
 

@@ -100,6 +100,15 @@ function getCartSizeForUser(username){
     return null;
 }
 
+function getCartForUser(username){
+    for (const user in dummyusers){
+        if (dummyusers[user].getUsername() == username){
+            return dummyusers[user].cart().toJSON();
+        }
+    }
+    return null;
+}
+
 app.post("/addToCart", function (req, res) {
     const form = new formidable.IncomingForm();
     
@@ -125,10 +134,9 @@ app.post("/addToCart", function (req, res) {
             res.sendStatus(401);
         } else {
             addProductToUserCart(username, new Product(productId, categoryId, title, cost));
+            console.log(getCartForUser(username));
             res.sendStatus(200);
         }
-        
-        
 
         print("'" + username +"'@'"+ sessionId +"' adding Product(id: "+productId+", catId: "+categoryId+", title:'"+title+"', cost:" +cost+ ") to their cart.");
 
@@ -157,6 +165,26 @@ app.post("/cartsize", function (req,res) {
                 print("NOTFOUND: Cart size for: '" + username +"':'"+ sessionId +"'");
                 res.sendStatus(404);
             }
+        }
+    });
+    
+});
+
+app.post("/cart", function (req,res) {
+    const form = new formidable.IncomingForm();
+    
+    form.parse(req, function (err, fields, files) {
+        var username = fields["username"];
+        var sessionId = fields["sessionId"];
+        if (!hasActiveSession(username, sessionId)){
+            // User does not exist:
+            print("UNAUTHORIZED: Cart size for: '" + username +"':'"+ sessionId +"'");
+            res.sendStatus(401);
+        } else {
+            var jsonCart = getCartForUser(username);
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(jsonCart));
+            print("Requesting Cart for: '" + username +"':'"+ sessionId +"'");
         }
     });
     
