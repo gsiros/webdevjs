@@ -300,12 +300,7 @@ function loadCart(){
 }
 
 function calculateCost(cart){
-    var totalCost = 0;
-    const items = cart["cartItems"];
-    items.forEach(item => {
-        totalCost += parseInt(item["cost"])*parseInt(item["quantity"]);
-    });
-    console.log(totalCost);
+    var totalCost = cart["totalCost"];
     let costTextBox = document.getElementById("totalCostNumber");
     costTextBox.innerHTML = "$"+totalCost;
 }

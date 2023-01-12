@@ -170,6 +170,15 @@ app.post("/cartsize", function (req,res) {
     
 });
 
+function calculateCost(cart){
+    var totalCost = 0;
+    const items = cart["cartItems"];
+    items.forEach(item => {
+        totalCost += parseInt(item["cost"])*parseInt(item["quantity"]);
+    });
+    return totalCost;
+}
+
 app.post("/cart", function (req,res) {
     const form = new formidable.IncomingForm();
     
@@ -182,6 +191,7 @@ app.post("/cart", function (req,res) {
             res.sendStatus(401);
         } else {
             var jsonCart = getCartForUser(username);
+            jsonCart["totalCost"] = calculateCost(jsonCart);
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(jsonCart));
             print("Requesting Cart for: '" + username +"':'"+ sessionId +"'");
@@ -193,3 +203,4 @@ app.post("/cart", function (req,res) {
 app.listen(4321, () => {
     print('Server listening on port 4321...');
 });
+
