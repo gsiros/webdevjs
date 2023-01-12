@@ -265,3 +265,7 @@ function getCartSize() {
         cartcounter.innerHTML = parseInt(dataJSON["size"]);
     });
 }
+
+function goToCart(){
+    window.location = `/cart.html?username=${currUsername}&sessionId=${currSessionId}`;
+}
