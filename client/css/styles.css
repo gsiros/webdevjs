@@ -344,7 +344,7 @@ section:hover.icategory {
     display: none;
     color: #4CAF50;
     opacity: 0;
-    animation: fadeIn 2s;
+    animation: fadeIn 3s;
 }
 
 @keyframes fadeIn {
