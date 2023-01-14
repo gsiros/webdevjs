@@ -29,7 +29,7 @@ Our logo is contained in a Flex-Box.
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: white;
+    background-color: #eaeaea;
     padding: 2px;
     margin-bottom: 3px;
     justify-content: left;
@@ -40,7 +40,7 @@ Our logo is contained in a Flex-Box.
 #logotext {
     font-family: Helvetica, sans-serif;
     font-size: xx-large;
-    color: #0a548e;
+    color: #212121;
     margin: 10px;
     position: center;   
 }
@@ -89,7 +89,8 @@ Our logo is contained in a Flex-Box.
 }
 
 main {
-    margin-top: 150px;
+    margin-top: 160px;
+    margin-bottom: 170px;
 }
 
 /*
@@ -101,7 +102,7 @@ nav {
     position: fixed;
     top: 100px;
     width: 100%;
-    background-color: #0B577F;
+    background-color: #9E9E9E;
     margin-bottom: 0;
     z-index: 10;
 }
@@ -114,7 +115,7 @@ we access a category in the navbar.
 nav a {
     display: inline-block;
     padding: 15px;
-    color: white;
+    color: #212121;
     font-size: larger;
     text-decoration: none;
     transition: background-color 0.4s;
@@ -126,7 +127,7 @@ item gets a different color.
 */
 
 nav a:hover {
-    background-color: #084371;
+    background-color: #BDBDBD;
 }
 
 nav a:nth-last-child(2) {
@@ -380,6 +381,10 @@ section:hover.icategory {
     padding-right: 30px;
 }
 
+.loginbutton {
+
+}
+
 .loginform {
     display: flex;
     flex-direction: column;
@@ -402,13 +407,27 @@ section:hover.icategory {
 }
 
 #greetmessage {
-    color: #4CAF50;
+    color: #212121;
     font-size: large;
 }
 
 .logoutbutton {
-    width: 100%;
+    background-color: #212121;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: medium;
+    border-radius: 10px;
+    margin-top: 10px;
+
 }
+/*
+.fa-solid.fa-cart-shopping {
+    color: #212121;
+}
+*/
+
 
 
 /* USE THE FOLLOWING FOR SMARTPHONE SIZE.
@@ -452,13 +471,17 @@ section:hover.icategory {
 }
 
 #carticon {
-    color: #757575;
+    color: #212121;
     font-size: 20pt;
 }
 
 #carticon:hover {
     cursor: pointer;
     color: #504f4f;
+}
+
+#add-to-cart-icon {
+    color: #212121;
 }
 
 .cartcounter {
@@ -549,7 +572,7 @@ a flexbox container.
 }
 
 #totalCostText{
-    color: #757575;
+    color: #9E9E9E;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -557,7 +580,7 @@ a flexbox container.
 #buynowbttn {
     width: 100%;
     align-self: flex-end;
-    background-color: #4CAF50;
+    background-color: #212121;
     padding: 10px;
     cursor: pointer;
     border: none;
@@ -567,7 +590,7 @@ a flexbox container.
 }
 
 #buynowbttn:hover {
-    background-color: #439d46;
+    background-color: #9E9E9E;
 }
 
 #contactform {
@@ -623,13 +646,14 @@ contactUs page.
 */
 
 button.cfitem {
-    background-color: #4CAF50;
+    background-color: #212121;
     padding: 10px;
     cursor: pointer;
     border: none;
     color: white;
     font-size: medium;
     border-radius: 10px;
+    margin-top: 10px;
 
 }
 
@@ -639,7 +663,7 @@ it changes color.
 */
 
 button.cfitem:active {
-    background-color: #439d46;
+    background-color: #212121;
 }
 
 #contactform input {
@@ -808,8 +832,8 @@ footer {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
-    background-color: #0B577F;
-    color: white;
+    background-color: #9E9E9E;
+    color: #212121;
 }
 
 footer section {
@@ -841,7 +865,7 @@ footer section {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
-    color: white;
+    color: #212121;
 }
 
 #footercopyright {
