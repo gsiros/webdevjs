@@ -24,9 +24,19 @@ class Cart {
         }    
     }
 
+    #calculateCost(){
+        var totalCost = 0;
+        this.#cart.forEach(function (value, key) {
+            var prod = JSON.parse(key);
+            totalCost += parseInt(prod["cost"])*parseInt(value);
+        });
+        return totalCost;
+    }
+
     toJSON(){
         var jsonCart = {
-            "cartItems":[]
+            "cartItems":[],
+            "totalCost": this.#calculateCost()
         };
         
         this.#cart.forEach(function (value, key) {

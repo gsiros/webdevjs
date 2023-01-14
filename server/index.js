@@ -4,6 +4,9 @@ const formidable = require('formidable');
 const { v4: uuidv4 } = require('uuid');
 const {User} = require("./User.js")
 const {Product} = require("./Product.js");
+const {UsersDAO} = require("./UsersDAO.js");
+
+var udao = new UsersDAO();
 
 const dummyusers = [
     new User("user1", "1234"),
@@ -36,16 +39,18 @@ app.post('/login', function(req, res) {
 
         var username = fields["username"];
         var password = fields["password"];
-        print("Login attempt: '" + username +"':'"+ password +"'");
-
-        if (!isValidUser(username, password)){
+        
+        var u = udao.getUser(username);
+        if (!u || !u.passwordMatch(password)){
             // User does not exist:
+            print("(FAIL) Login attempt: '" + username +"':'"+ password +"'");
             res.sendStatus(401);
         } else {
+            print("(SUCCESS) Login attempt: '" + username +"':'"+ password +"'");
             res.writeHead(200, { 'Content-Type': 'application/json' });
             //res.json({"sessionId" : uuidv4()});
             const sessionId = uuidv4();
-            updateUserSessionId(username, sessionId);
+            u.updateSessionId(sessionId);
             res.end(JSON.stringify({"sessionId" : sessionId}));
             //res.end(`{"sessionId" : "${uuidv4()}"}`);
         }
@@ -54,60 +59,6 @@ app.post('/login', function(req, res) {
 
 
 });
-
-function updateUserSessionId(username, newSessionId){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username){
-            dummyusers[user].setCurrentSessionId(newSessionId);
-        }
-    }
-    return false;
-}
-
-function isValidUser(username, password){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username && dummyusers[user].getPassword() == password){
-            return true;
-        }
-    }
-    return false;
-}
-
-function hasActiveSession(username, sessionId){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username && dummyusers[user].getCurrentSessionId() == sessionId){
-            return true;
-        }
-    }
-    return false;
-}
-
-function addProductToUserCart(username, product){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username){
-            dummyusers[user].cart().add(product);
-            break;
-        }
-    }
-}
-
-function getCartSizeForUser(username){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username){
-            return dummyusers[user].cart().size();
-        }
-    }
-    return null;
-}
-
-function getCartForUser(username){
-    for (const user in dummyusers){
-        if (dummyusers[user].getUsername() == username){
-            return dummyusers[user].cart().toJSON();
-        }
-    }
-    return null;
-}
 
 app.post("/addToCart", function (req, res) {
     const form = new formidable.IncomingForm();
@@ -128,17 +79,16 @@ app.post("/addToCart", function (req, res) {
         var title = fields["title"];
         var cost = fields["cost"];
 
-        // TODO: check if user has an active session...
-        if (!hasActiveSession(username, sessionId)){
+        var u = udao.getUser(username);
+        if (!u || !u.sessionIdMatch(sessionId)){
             // No active session found:
             res.sendStatus(401);
         } else {
-            addProductToUserCart(username, new Product(productId, categoryId, title, cost));
-            console.log(getCartForUser(username));
+            u.cart().add(new Product(productId, categoryId, title, cost));
             res.sendStatus(200);
+            print("'" + username +"'@'"+ sessionId +"' adding Product(id: "+productId+", catId: "+categoryId+", title:'"+title+"', cost:" +cost+ ") to their cart.");
         }
 
-        print("'" + username +"'@'"+ sessionId +"' adding Product(id: "+productId+", catId: "+categoryId+", title:'"+title+"', cost:" +cost+ ") to their cart.");
 
     });
 
@@ -150,34 +100,21 @@ app.post("/cartsize", function (req,res) {
     form.parse(req, function (err, fields, files) {
         var username = fields["username"];
         var sessionId = fields["sessionId"];
-        if (!hasActiveSession(username, sessionId)){
+
+        var u = udao.getUser(username);
+        if (!u || !u.sessionIdMatch(sessionId)){
             // User does not exist:
             print("UNAUTHORIZED: Cart size for: '" + username +"':'"+ sessionId +"'");
             res.sendStatus(401);
         } else {
-            
-            var size = getCartSizeForUser(username);
-            if (size != null){
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({"size" : size}));
-                print("Requesting Cart size for: '" + username +"':'"+ sessionId +"'");
-            } else {
-                print("NOTFOUND: Cart size for: '" + username +"':'"+ sessionId +"'");
-                res.sendStatus(404);
-            }
+            var size = u.cart().size();
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({"size" : size}));
+            print("Requesting Cart size for: '" + username +"':'"+ sessionId +"'");
         }
     });
     
 });
-
-function calculateCost(cart){
-    var totalCost = 0;
-    const items = cart["cartItems"];
-    items.forEach(item => {
-        totalCost += parseInt(item["cost"])*parseInt(item["quantity"]);
-    });
-    return totalCost;
-}
 
 app.post("/cart", function (req,res) {
     const form = new formidable.IncomingForm();
@@ -185,13 +122,14 @@ app.post("/cart", function (req,res) {
     form.parse(req, function (err, fields, files) {
         var username = fields["username"];
         var sessionId = fields["sessionId"];
-        if (!hasActiveSession(username, sessionId)){
+
+        var u = udao.getUser(username);
+        if (!u || !u.sessionIdMatch(sessionId)){
             // User does not exist:
             print("UNAUTHORIZED: Cart size for: '" + username +"':'"+ sessionId +"'");
             res.sendStatus(401);
         } else {
-            var jsonCart = getCartForUser(username);
-            jsonCart["totalCost"] = calculateCost(jsonCart);
+            var jsonCart = u.cart().toJSON();
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(jsonCart));
             print("Requesting Cart for: '" + username +"':'"+ sessionId +"'");

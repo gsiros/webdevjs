@@ -15,7 +15,7 @@ class User {
 
     getUsername(){
         return this.#username;
-    }
+    }sx
 
     getPassword(){
         return this.#password;
@@ -25,8 +25,16 @@ class User {
         return this.#currSessionId;
     }
 
-    setCurrentSessionId(sessionId){
+    updateSessionId(sessionId){
         this.#currSessionId = sessionId;
+    }
+
+    passwordMatch(password){
+        return this.#password == password;
+    }
+
+    sessionIdMatch(sessionId){
+        return this.#currSessionId == sessionId;
     }
 
     cart(){
