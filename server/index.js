@@ -9,20 +9,12 @@ const { Log } = require('./Log.js');
 
 const mongoClusterURI = "mongodb+srv://client:client@gscluster.jrrwvtn.mongodb.net/?retryWrites=true&w=majority";
 var logger = new Log(mongoClusterURI);
-/*logger.addUser("user1", "1234").then((res) => {
-    print(`DB: Backed-up User(usr: user1, pswd: 1234) in the database.`)
-});
-logger.addUser("user2", "0000").then((res) => {
-    print(`DB: Backed-up User(usr: user2, pswd: 0000) in the database.`)
-});*/
 
 var udao = new UsersDAO();
 logger.load().then((users) => {
     udao.load(users);
     print(`BACK-UP: Loaded users from the database.`);
 })
-//udao.addUser(new User("user1", "1234"));
-//udao.addUser(new User("user2", "0000"));
 
 function print(something){
     var now = new Date();

@@ -14,8 +14,8 @@ class Log {
     async fetchAllUsers(){
         var res = undefined;
         this.#client = new MongoClient(this.#uri);
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
+        const database = this.#client.db('userdb');
+        const coll = database.collection('users');
 
         res = await coll.find().toArray();
         await this.#client.close();
@@ -45,8 +45,8 @@ class Log {
         
         this.#client = new MongoClient(this.#uri);
 
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
+        const database = this.#client.db('userdb');
+        const coll = database.collection('users');
 
         res = await coll.findOne({ username: usr });
         
@@ -57,8 +57,8 @@ class Log {
 
     async addUser(usr, pswd){
         this.#client = new MongoClient(this.#uri);
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
+        const database = this.#client.db('userdb');
+        const coll = database.collection('users');
         await coll.insertOne({
             username: usr,
             password: pswd,
@@ -69,8 +69,8 @@ class Log {
 
     async addProduct(usr, product){
         this.#client = new MongoClient(this.#uri);
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
+        const database = this.#client.db('userdb');
+        const coll = database.collection('users');
 
         await coll.updateOne(
             { 
@@ -80,35 +80,6 @@ class Log {
         );
         await this.#client.close();
     }
-
-    /*async initProduct(usr, product){
-        this.#client = new MongoClient(this.#uri);
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
-        
-        await coll.updateOne(
-            { username: usr },
-            { $push: { 'products': { "prd": product.toJSON(), "quantity": 1} }}
-        );
-        await this.#client.close();
-    }
-
-    async incrProduct(usr, product){
-
-        this.#client = new MongoClient(this.#uri);
-
-        const database = this.#client.db('test4');
-        const coll = database.collection('carts1');
-        await coll.updateOne(
-            { 
-                username: usr,
-                "products.prd": product.toJSON()
-            },
-            { $inc: { 'products.$.quantity': 1 }}
-        );
-        await this.#client.close();
-        
-    }*/
 
 }
 

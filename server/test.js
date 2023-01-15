@@ -25,7 +25,9 @@ const { User } = require("./User.js");
 
 async function run2(){
     var l = new Log(uri);
-    //await l.addUser("cookoo","mela");
+    await l.addUser("user1","1234");
+    await l.addUser("user2","0000");
+    await l.addUser("bzafeiris","webdev");
     //await l.addProduct("cookoo", new Product(2,2,"gayz",23));
     //await l.incrProduct("ngasd1", new Product(2,2,"gayz",23));
     //return await l.fetchCart("tom");
@@ -34,7 +36,7 @@ async function run2(){
 }  
 
 run2().then((res => {
-    console.log(res, res[1].getUsername(), res[1].cart().toJSON());
+    console.log(res.length, res[1].getUsername(), res[1].cart().toJSON());
 }));
 //var pjson = {"id":1, "categoryId":1, "title":"eheheh", "cost": 42};
 //console.log(Product.fromJSON(pjson))
