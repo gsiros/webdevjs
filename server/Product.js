@@ -40,6 +40,15 @@ class Product {
     equals(p){
         return (this.#id == p.getId()) && (this.#categoryId == p.getCatId()) && (this.#title == p.getTitle()) && (this.#cost == p.getCost());
     }
+
+    static fromJSON(pjson){
+        return new Product(
+            pjson["id"],
+            pjson["categoryId"],
+            pjson["title"],
+            pjson["cost"]
+        );
+    }
 }
 
 module.exports = {Product};
