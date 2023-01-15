@@ -15,7 +15,7 @@ class User {
 
     getUsername(){
         return this.#username;
-    }sx
+    }
 
     getPassword(){
         return this.#password;
