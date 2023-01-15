@@ -6,8 +6,6 @@ class UsersDAO {
 
     constructor(){
         this.#users = [];
-        this.#users.push(new User("user1", "1234"));
-        this.#users.push(new User("user2", "0000"));
     }
 
     addUser(user){
@@ -21,6 +19,10 @@ class UsersDAO {
             }
         }
         return null;
+    }
+
+    load(usrs){
+        this.#users = usrs;
     }
 }
 
