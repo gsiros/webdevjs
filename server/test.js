@@ -16,7 +16,25 @@ console.log(p == d);*/
 const { UsersDAO } = require("./UsersDAO.js");
 
 var udao = new UsersDAO();
-udao.addUser("george", "1234");
-udao.updateUserSessionId("george","asdfas4");
-console.log(udao.hasActiveSession("george","asdfas4"));
-console.log(udao.getCartForUser("george"));
+
+const uri = "mongodb+srv://client:client@gscluster.jrrwvtn.mongodb.net/?retryWrites=true&w=majority";
+
+const {Log} = require("./Log.js");
+const { Product } = require("./Product.js");
+const { User } = require("./User.js");
+
+async function run2(){
+    var l = new Log(uri);
+    //await l.addUser("cookoo","mela");
+    //await l.addProduct("cookoo", new Product(2,2,"gayz",23));
+    //await l.incrProduct("ngasd1", new Product(2,2,"gayz",23));
+    //return await l.fetchCart("tom");
+    //var carts = await l.fetchAllCarts();
+    return await l.load();
+}  
+
+run2().then((res => {
+    console.log(res, res[1].getUsername(), res[1].cart().toJSON());
+}));
+//var pjson = {"id":1, "categoryId":1, "title":"eheheh", "cost": 42};
+//console.log(Product.fromJSON(pjson))
