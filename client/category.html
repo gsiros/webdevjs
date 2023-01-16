@@ -4,7 +4,7 @@
 	<head>
 		<link rel="icon" href="src/wikishop_logo.png" type="image/x icon">
 
-		<title>Wikishop: Η τελευταία λέξη της μόδας στο σπίτι σας.</title>
+		<title>Wikishop: The Wiki for Clothes</title>
 		<!-- meta elements -->
 		<meta charset="UTF-8">
 		<meta name="description" content = "e-shop">
@@ -13,7 +13,6 @@
 		<link rel="stylesheet" href="css/styles.css">
 		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 		<script src="https://kit.fontawesome.com/c82bcd8173.js" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="js/css_misc.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		
@@ -42,12 +41,6 @@
 			{{/each}}
 		</script>
 
-		<style>
-			#productstab {
-				background-color: #212121;
-			}
-		</style>
-
 	</head>
 
 	<body onload="loadProducts();">
@@ -56,9 +49,7 @@
 		</section>
 		<nav id="mainnavbar" class="navbar">
 			<a id="indextab" href = "index.html">Home</a>
-            <a id="logintab" href="login.html">Σύνδεση</a>
-			<a id="moretab" href="javascript:void(0);" onclick="navbarChanger()"><i class="fa fa-bars" aria-hidden="true"></i></a>
-		</nav>
+        </nav>
 
 		<main>
 
@@ -81,7 +72,7 @@
 						</section>						
 					</div>
 					
-					<button class="logoutbutton" onclick="logout();">Logout</button>
+					<button class="cfitem" onclick="logout();">Logout</button>
 				</section>
 
 
@@ -103,7 +94,7 @@
 
 
 			<section id="footersocials">
-				<h3>ΑΚΟΛΟΥΘΗΣΤΕ ΜΑΣ</h3>
+				<h3>FOLLOW US</h3>
 				<section class="footersocialicons">
 					<a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
 					<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></i></a>
