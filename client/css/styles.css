@@ -235,8 +235,8 @@ products-laptops and products-smartphones.
     grid-template-columns: repeat(auto-fill, minmax(var(--categoryitem-min-size), 1fr));
     grid-gap: 1rem;
     justify-items: center;
-    margin-top: 50px;
-    margin-bottom: 100px;
+    margin-top: 270px;
+    margin-bottom: 0px;
 }
 
 .icategory {
